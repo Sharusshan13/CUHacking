@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 
 <html>
+	<head>
+		  <link rel="stylesheet" href="style.css">
+	</head>
 	<body>
 		<h2>Skill Dig</h2>
 		<p>Enter the skills you are searching for below.</p>
-		<form action="/canvas.js">
-  			<textarea name="message" rows="10" cols="100">5+ years of experience with C++ and a Bachelor’s degree in Electrical Engineering or Computer Science. Experience in Graphical User Interface Design and Qt Development. Willingness to participate in the development of a graphical user interface for our client’s next generation of data acquisition system products. Software development experience in a Linux environment.
-  			</textarea>
+
+
+
+				<form action="">
+				<textarea name="message" rows="10" cols="100"></textarea>
+
   			<br>
-  			<input type="submit">
-		</form>
+				<input id="theId" onclick="myfunction()" type="submit">
+				</form>
+
+
+		<script>
+
+			function myfunction () {
+			var message=document.getElementsByName("message");
+			var i;
+	for (i = 0; i < message.length; i++) {
+
+  	  console.log(message[i].value);
+	}
+
+
+			}
+
+		</script>
 	</body>
+
 </html>
