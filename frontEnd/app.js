@@ -1,14 +1,35 @@
-var express = require('express');
-var path = require('path');
-var app = express();
-var http = require('http').Server(app);
+let http = require('http');
+let express = require('express');
+let upload = require('express-fileupload');
+
+let app = express();
+http.Server(app).listen(3000);
+app.use(upload());
+
+console.log('Server started @ port 3000');
 
 app.get('/', function(req, res) {
-res.sendFile(__dirname + '/html/index.html');
-});
+	res.sendFile(__dirname + '/index.html');
+})
 
-http.listen(2000, function() {
-console.log("Server started.");
-});
-
-app.use(express.static(path.join(__dirname, 'html')));
+app.post('/upload', function(req, res) {
+	console.log(req.files);
+	if (req.files.upfile) {
+		let file = req.files.upfile,
+			name = file.name,
+			type = file.mimetype;
+		let uploadpath = __dirname + '/uploads/' + name;
+		file.mv(uploadpath, function(err) {
+			if (err) {
+				console.log('File upload failed', name, err);
+				res.send('Error Occured!');
+			} else {
+				console.log('File uploaded', name);
+				res.send('Done! Uploading file');
+			}
+		});
+	} else {
+		res.send('No file selected!');
+		res.end();
+	}
+})
